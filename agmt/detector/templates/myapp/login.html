@@ -1,0 +1,272 @@
+<{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #9d05bc, #09c8cf);
+            background-image: url("{% static 'images/Backgnd9.jpg' %}");
+            background-size: cover; /* Ensures the image covers the entire screen */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            /*background-color: rgba(252, 253, 254, 0.5); /* 0.5 means 50% transparency */
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            text-align: left;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        input[type="submit"],
+        .button-container {
+            justify-content: space-between;
+            text-align: center;
+        }
+        
+        input[type="submit"],
+        .back-button,
+        .button-container button {
+            display: inline-flex;
+            justify-content: center;
+            padding: 12px 25px;
+            border: 2px solid #007bff;
+            border-radius: 15px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            margin-right: 10px;
+        }
+        
+        .back-button:hover,
+        input[type="submit"]:hover,
+        .button-container button:hover {
+            background-color: #0056b3;
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+        #para {
+            font-weight: bold;
+            color: #fe0404;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login with your details !</h1>
+        <form method="POST" action="{% url 'login_check' %}">
+            {% csrf_token %}
+            <label for="name">Farmer Name: Mr/Mrs. </label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="contact_number">Contact Number:</label>
+            <input type="number" id="contact_number" name="contact_number" min="1000000000" max="9999999999" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p id="para" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <div class="button-container">
+                <a href="{% url 'userreg' %}" class="back-button">Register</a>
+                <input type="submit" value="Login">
+                <a href="{% url 'home' %}" class="back-button">Back</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+<!-- {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'images/background.webp' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        /* FORM CONTAINER (NO CURVED EDGES) */
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8); /* Solid background for clarity */
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border-radius: 0; /* No curves */
+            border: 3px solid #004085; /* Dark blue border */
+        }
+
+        /* BOLD & HIGH-CONTRAST TEXT */
+        h1 {
+            color: #004085; /* Dark Blue */
+            font-weight: bold;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #000; /* Black text */
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* RECTANGULAR INPUT FIELDS */
+        input[type="text"],
+        input[type="contact_number"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #004085; /* Dark Blue border */
+            border-radius: 0; /* No rounded edges */
+            background: #fff;
+            color: #000;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* INPUT FOCUS EFFECT */
+        input[type="text"]:focus,
+        input[type="contact_number"]:focus,
+        input[type="password"]:focus {
+            background: #e9ecef;
+            border-color: #067c9d; /* Red highlight on focus */
+            outline: none;
+        }
+
+        /* BUTTONS (BOLD COLORS & NO CURVED EDGES) */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .button-container a,
+        input[type="submit"] {
+            display: inline-flex;
+            justify-content: center;
+            padding: 12px 25px;
+            border-radius: 0; /* No curves */
+            background: #004085; /* Dark Blue */
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 3px solid #004085;
+            text-transform: uppercase;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .button-container a:hover,
+        input[type="submit"]:hover {
+            background: #05dbea; /* Red on hover */
+            border-color: #06dcc3;
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+
+        /* ERROR MESSAGE */
+        #para {
+            font-weight: bold;
+            color: #ff0000; /* Bright red for errors */
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LOGIN</h1>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p id="para" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <label for="name">Farmer Name: Mr/Mrs. </label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="contact_number">Contact Number:</label>
+            <input type="number" id="contact_number" name="contact_number" min="1000000000" max="9999999999" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <div class="button-container">
+                <input type="submit" value="LOGIN">
+                <a href="{% url 'home' %}" class="back-button">Back</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html -->

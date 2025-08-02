@@ -1,0 +1,159 @@
+<{% load static %}>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #3498db, #adf1c9);
+            background-image: url("{% static 'images/Backgnd4.jpg' %}");
+            background-size: cover; /* Ensures the image covers the entire screen */
+            text-align: center;
+        }
+        
+        form {
+            width: 80%;
+            max-width: 500px;
+            margin: auto;
+            margin-top: 40px;
+            padding: 40px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fcfdfe;
+            background-color: rgba(252, 253, 254, 0.5); /* 0.5 means 50% transparency */
+
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="submit"] {
+            width: 40%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        input[type="submit"] {
+            background-color: #0056b3;
+            margin-right: 10px;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        input[type="submit"]:hover,
+        .back-button:hover {
+            background-color: #64919b;
+        }
+        
+        .button-container {
+            margin-top: 20px;
+        }
+        
+        .back-button {
+            background-color: #0056b3;
+            margin-right: 10px;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        label {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        #error-message {
+            font-weight: bold;
+            color: #fe0404;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        function validateForm() 
+        {
+            var password = document.getElementById("tpassword").value;
+            var confirmPassword = document.getElementById("tconfirmpassword").value;
+            var errorMessage = document.getElementById("error-message");
+
+            if (password !== confirmPassword) 
+            {
+                errorMessage.innerHTML = "Passwords do not match!";
+                return false;
+            }
+            
+            else 
+            {
+                errorMessage.innerHTML = ""; 
+                return true;
+            }
+        }
+    </script>
+</head>
+   
+<body>
+    <center>
+        <form name="user_registration" method="post" action="{% url 'insertuser' %}" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <h1>Hello Farmer!</h1>
+            <h2>Welcome to AgriApp !!</h2>
+            <h2>Register here with your details !!!</h2>
+
+            {% if form.errors %}
+                <div class="error-message">Please correct the following errors:</div>
+            {% endif %}
+
+            <label for="tuid">Contact :</label>
+            <input type="number" id="tuid" name="tuid" min="1000000000" max="9999999999" required><br>
+
+            <label for="tuname">Name :</label>
+            <input type="text" id="tuname" name="tuname" required><br>
+
+            <label for="tuemail">Email :</label>
+            <input type="email" id="tuemail" name="tuemail" required><br>
+
+            <label for="tpassword">Password :</label>
+            <input type="password" id="tpassword" name="tpassword" required><br>
+
+            <label for="tconfirmpassword">Confirm Password:</label>
+            <input type="password" id="tconfirmpassword" name="tconfirmpassword" required><br>
+
+            <p id="error-message"></p>
+
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p id="error-message" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="button-container">
+                <input type="submit" style="width: 90px;" name="reg" value="Get OTP">
+                <a href="{% url 'home' %}" class="back-button">Back</a>
+            </div>
+        </form>
+    </center>
+</body>
+</html>

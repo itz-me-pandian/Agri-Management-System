@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            background-image: url("{% static 'images/farmer2.jpg' %}");
+            background-size: cover; /* Ensures the image covers the entire screen */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display:flex;
+            align-items: center;
+        }
+        .form-label {
+            font-weight: bold;
+            min-width: 150px;
+            color: #555;
+            text-align:center;
+            margin-right: 20px;
+        }
+        .form-input {
+            flex-grow: 1;
+            color: #333;
+            text-align: left;
+        }
+        .colon {
+            margin: 0 6px;
+            font-weight: bold;
+        }
+        .welcome-message {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            align-items: center; /* Center the buttons */
+            margin-top: 20px;
+            gap: 15px; /* Adds spacing between buttons */
+        }
+        
+        .button-container a.button,
+        .back-button {
+            display: inline-flex;
+            justify-content: center;
+            padding: 12px 25px;
+            border: 2px solid #007bff;
+            border-radius: 15px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+        .button-container a.button:hover,
+        .back-button:hover {
+            background-color: #0056b3;
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+        
+        .button-container a:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Dashboard</h1>
+        <div class="form-group">
+            <div class="form-label welcome-message">HELLO ! THIS IS Mr./Mrs. <span style="text-transform: uppercase;">{{ user.uname }} </span>!!</div><br><br>
+        </div>
+        <div class="form-group">
+            <div class="form-label">Contact Number</div>
+            <div class="colon">:</div>
+            <div class="form-input">{{ user.id }}</div>
+        </div>
+        <div class="form-group">
+            <div class="form-label">Email</div>
+            <div class="colon">:</div>
+            <div class="form-input">{{ user.uemail }}</div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a href="/commodities" class="button">Commodity Rate Visualization</a>
+        <a href="/crop_recommendation" class="button">Crop Recommendation</a>
+        <a href="/imageinput" class="button">Disease Detection</a>
+        <a href="javascript:history.back()" class="back-button">Log out</a>
+    </div>
+</body>
+</html>

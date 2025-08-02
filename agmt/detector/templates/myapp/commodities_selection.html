@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodities Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .commodity-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .commodity-list li {
+            margin: 10px 0;
+        }
+        .commodity-list label {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #555;
+        }
+        .commodity-list input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .submit-btn {
+            display: block;
+            width: 20%;
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 15px auto;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .button-container .button {
+            display: inline-block;
+            padding: 12px 25px;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .button-container .button:hover {
+            background-color: #0056b3;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+        
+        .button-container .button:active {
+            transform: scale(0.95);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Select Commodities</h2>
+        <form id="commoditiesForm" onsubmit="return handleSubmit(event)">
+            {% csrf_token %}
+            <ul class="commodity-list">
+                {% for commodity in commodities %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="commodities" value="{{ commodity }}">
+                        {{ commodity }}
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
+            
+            <div class="button-container">
+                <button type="submit" class="submit-btn">Submit</button>
+                <a href="javascript:history.back()" class="button">Back</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+        
+            const form = event.target;
+            const checkboxes = document.querySelectorAll('input[name="commodities"]:checked');
+            const selectedCommodities = Array.from(checkboxes).map(input => input.value);
+        
+            if (selectedCommodities.length === 0) {
+                alert("Please select at least one commodity.");
+                return false;
+            }
+        
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            console.log("CSRF Token:", csrftoken);  
+        
+            fetch('handle_commodities/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({ selectedCommodities: selectedCommodities })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Response from Django:", data);  
+        
+                if (data.status === 'success') {
+                    window.location.href = data.redirect_url;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error); 
+                alert("An error occurred while sending data.");
+            });
+        
+            return false; 
+        }
+    </script>
+</body>
+</html>
