@@ -18,5 +18,6 @@ urlpatterns = [
     path("commodities/handle_commodities/",views.handle_selected_commodities,name="Get commodities from html file"),
     path('visualize/',views.price_visualization,name='visualization'),
     path('crop_recommendation/',vw.map,name='crop_recommendation'),
-    path('save_data/',vw.save_data,name='save')
+    path('save_data/',vw.save_data,name='save'),
+    path('crop_recommendation/recommend_crop/', vw.recommend_crop, name='recommend_crop')
 ]
