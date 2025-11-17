@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path('',views.map, name='map'),
-    path('save_data/',views.save_data,name='save')
+    path('save_data/',views.save_data,name='save'),
+    path('recommend/', views.recommend_crop, name='recommend_crop'),
 ]
