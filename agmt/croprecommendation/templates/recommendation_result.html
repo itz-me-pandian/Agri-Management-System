@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Prediction Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+      color: #2a9d8f;
+    }
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+      padding: 10px;
+      background: #f1f5f8;
+      border-radius: 5px;
+    }
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+    .value {
+      color: #444;
+    }
+    .highlight {
+      background: #d1f7d6;
+      color: #1e7a2e;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      justify-content: center;
+      padding: 12px 25px;
+      border: 2px solid #007bff;
+      border-radius: 15px;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 16px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+ 
+  .back-button:hover {
+      background-color: #0056b3;
+      cursor: pointer;
+      transform: scale(1.05);
+  }
+  
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Crop Prediction Result</h1>
+    <div class="data-row">
+      <span class="label">🌡 Temperature:</span>
+      <span class="value">{{ temperature }} °C</span>
+    </div>
+    <div class="data-row">
+      <span class="label">💧 Humidity:</span>
+      <span class="value">{{ humidity }}%</span>
+    </div>
+    <div class="data-row">
+      <span class="label">🌧 Rainfall:</span>
+      <span class="value">{{ rainfall }} mm</span>
+    </div>
+    <div class="data-row">
+      <span class="label">🧪 Nitrogen:</span>
+      <span class="value">{{ nitrogen }} kg/ha</span>
+    </div>
+    <div class="data-row">
+      <span class="label">🧪 Phosphorus:</span>
+      <span class="value">{{ phosphorus }} kg/ha</span>
+    </div>
+    <div class="data-row">
+      <span class="label">🧪 Potassium:</span>
+      <span class="value">{{ potassium }} kg/ha</span>
+    </div>
+    <div class="data-row">
+      <span class="label">🧪 Soil pH:</span>
+      <span class="value">{{ ph }}</span>
+    </div>
+    <div class="highlight">
+      🌾 Predicted Crop: {{ predicted_crop }}
+    </div>
+
+    <a href="javascript:history.back()" class="back-button">Go Back</a>
+  </div>
+</body>
+</html>
