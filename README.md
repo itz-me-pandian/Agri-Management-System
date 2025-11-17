@@ -1,4 +1,4 @@
-# Tutorial: Agri-Management-System
+# Agri-Management-System : Crop Disease Detection and Prevention
 
 The Agri-Management-System is a comprehensive *web application* designed to empower farmers. It provides an intelligent **Plant Disease Diagnoser** that identifies crop ailments from uploaded leaf images and offers specific remedies. Additionally, it features a **Smart Crop Advisor** that suggests optimal crops based on real-time location and weather data, and an **Agricultural Market Price Monitor** that visualizes current commodity prices to aid informed selling decisions.
 
