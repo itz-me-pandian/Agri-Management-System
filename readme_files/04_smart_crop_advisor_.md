@@ -92,7 +92,7 @@ document.getElementById("confirmYes").addEventListener("click", async () => {
 
 #### Step 4: Viewing the Recommended Crop
 
-After the system fetches the data and sends it to the backend, the "Crop Brain" gets to work. The recommended crop will then be processed and displayed in the backend console (for now, in a real application, this would be sent back to the frontend).
+After the system fetches the data and sends it to the backend, the "Crop Brain" gets to work. The recommended crop will then be processed and displayed in the backend console, this would be also sent back to the frontend.
 
 For instance, if you clicked on a location with high rainfall and moderate temperature, the system might internally print something like:
 
@@ -331,4 +331,5 @@ Now that we can help farmers choose the right crop, how about helping them sell 
 
 
 <sub><sup>**References**: [[1]](https://github.com/itz-me-pandian/Agri-Management-System/blob/23cac15d4ba833e8d5a77db1b8269b72e3f1e993/agmt/croprecommendation/templates/mapData.html), [[2]](https://github.com/itz-me-pandian/Agri-Management-System/blob/23cac15d4ba833e8d5a77db1b8269b72e3f1e993/agmt/croprecommendation/urls.py), [[3]](https://github.com/itz-me-pandian/Agri-Management-System/blob/23cac15d4ba833e8d5a77db1b8269b72e3f1e993/agmt/croprecommendation/views.py)</sup></sub>
+
 
