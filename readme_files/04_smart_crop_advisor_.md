@@ -135,8 +135,7 @@ sequenceDiagram
     ML-->>APP: Returns Predicted Crop Name
     APP->>APP: Prints Crop Name (in console for now)
     APP-->>B: Sends Confirmation (e.g., "Data received")
-    Note over B,F: (Frontend would ideally display crop name,
-                   but for now it's in backend console)
+    Note over B,F: (Frontend would ideally display crop name, but for now it's in backend console)
 ```
 
 #### URL Routing for the Crop Advisor
@@ -329,5 +328,6 @@ In this chapter, we explored the incredible **Smart Crop Advisor**! We learned h
 Now that we can help farmers choose the right crop, how about helping them sell it at the best price? In the next chapter, we'll dive into the [Agricultural Market Price Monitor](05_agricultural_market_price_monitor_.md).
 
 ---
+
 
 <sub><sup>**References**: [[1]](https://github.com/itz-me-pandian/Agri-Management-System/blob/23cac15d4ba833e8d5a77db1b8269b72e3f1e993/agmt/croprecommendation/templates/mapData.html), [[2]](https://github.com/itz-me-pandian/Agri-Management-System/blob/23cac15d4ba833e8d5a77db1b8269b72e3f1e993/agmt/croprecommendation/urls.py), [[3]](https://github.com/itz-me-pandian/Agri-Management-System/blob/23cac15d4ba833e8d5a77db1b8269b72e3f1e993/agmt/croprecommendation/views.py)</sup></sub>
